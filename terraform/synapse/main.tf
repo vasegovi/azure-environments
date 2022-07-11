@@ -41,7 +41,7 @@ resource "azurerm_synapse_workspace" "synapsewsp" {
   sql_administrator_login_password     = var.sqladminpassword
 
   aad_admin {
-    login     = "AzureAD Admin"
+    login     = var.loginadsynapse
     object_id = var.addadminobjectid
     tenant_id = var.addadmintenantid
   }

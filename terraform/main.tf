@@ -40,4 +40,5 @@ module "Synapse" {
   nodesize = var.nodesize
   maxnodecount = var.maxnodecount
   minnodecount = var.minnodecount
+  loginadsynapse = var.loginadsynapse
 }

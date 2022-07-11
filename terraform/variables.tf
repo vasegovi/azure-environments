@@ -92,3 +92,8 @@ variable "minnodecount"{
     type= number
     description = "min_node_count"
 }
+
+variable "loginadsynapse"{
+    type= string
+    description = "Login AAD Synapse"
+}
