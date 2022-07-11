@@ -57,3 +57,38 @@ variable "addadmintenantid" {
     type = string
     description = "aad_admin - tenantid"
 }
+
+variable "sqlpoolsynapsename"{
+    type= string
+    description = "name of sql pool synapse"
+}
+
+variable "sku_name"{
+    type= string
+    description = "sku of name of sql pool synapse"
+}
+
+variable "sparkpoolsynapsename"{
+    type= string
+    description = "name os spark pool "
+}
+
+variable "nodesizefamily"{
+    type= string
+    description = "node_size_family"
+}
+
+variable "nodesize"{
+    type= string
+    description = "node_size"
+}
+
+variable "maxnodecount"{
+    type= number
+    description = "max_node_count"
+}
+
+variable "minnodecount"{
+    type= number
+    description = "min_node_count"
+}

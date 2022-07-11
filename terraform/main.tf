@@ -33,4 +33,11 @@ module "Synapse" {
   sqladminpassword = var.sqladminpassword
   addadminobjectid = var.addadminobjectid
   addadmintenantid = var.addadmintenantid
+  sqlpoolsynapsename = var.sqlpoolsynapsename
+  sku_name = var.sku_name
+  sparkpoolsynapsename = var.sparkpoolsynapsename
+  nodesizefamily = var.nodesizefamily
+  nodesize = var.nodesize
+  maxnodecount = var.maxnodecount
+  minnodecount = var.minnodecount
 }
