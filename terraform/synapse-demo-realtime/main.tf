@@ -14,13 +14,29 @@ provider "azurerm" {
 }
 
 module "ResourceGroup" {
-  source = "./resource-group"
+  source = "../modules/resource-group"
   nameRG = var.nameRG
   location = var.location
 }
 
+
+module "StorageAccount" {
+  source = "../modules/storage"
+  nameStorage = "streamdatalake"
+  resource_group_name = module.ResourceGroup.rg_name_out
+  location = var.location
+}
+
+module "EventHub" {
+  source = "../modules/eventhub"
+  name-nsp = "streaming-eh"
+  name-eh = "customer"
+  resource_group_name = module.ResourceGroup.rg_name_out
+  location = var.location
+}
+
 module "Synapse" {
-  source = "./synapse"
+  source = "../modules/synapse"
   namesynapse = var.namesynapse
   resource_group_name = module.ResourceGroup.rg_name_out
   location = var.location
@@ -42,3 +58,12 @@ module "Synapse" {
   minnodecount = var.minnodecount
   loginadsynapse = var.loginadsynapse
 }
+
+
+module "KeyVault" {
+  source = "../modules/keyvault"
+  resource_group_name = module.ResourceGroup.rg_name_out
+  location = var.location
+  keyvaultname = var.keyvaultname
+}
+

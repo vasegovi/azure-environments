@@ -14,7 +14,7 @@ data "azurerm_subscription" "primary" {
 data "azurerm_client_config" "synapseconf" {
 }
 
-/*resource "azurerm_role_assignment" "roleOwner" {
+resource "azurerm_role_assignment" "roleOwner" {
   scope                = azurerm_storage_account.storagesynapse.id
   role_definition_name = "Owner"
   principal_id         = data.azurerm_client_config.synapseconf.object_id
@@ -22,14 +22,14 @@ data "azurerm_client_config" "synapseconf" {
     create = "1m"
     delete = "1m"
   }
-}*/
+}
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "synapsefsys" {
   name               = var.filesystemname
   storage_account_id = azurerm_storage_account.storagesynapse.id
- /* depends_on = [
+  depends_on = [
     azurerm_role_assignment.roleOwner
-  ]*/
+  ]
 }
 
 resource "azurerm_synapse_workspace" "synapsewsp" {
@@ -51,7 +51,14 @@ resource "azurerm_synapse_workspace" "synapsewsp" {
   }
 }
 
-resource "azurerm_synapse_sql_pool" "sqlpoolsynapse" {
+resource "azurerm_synapse_firewall_rule" "firewall_rule" {
+  name                 = "AllowAll"
+  synapse_workspace_id = azurerm_synapse_workspace.synapsewsp.id
+  start_ip_address     = "0.0.0.0"
+  end_ip_address       = "255.255.255.255"
+}
+
+/*resource "azurerm_synapse_sql_pool" "sqlpoolsynapse" {
   name                 = var.sqlpoolsynapsename
   synapse_workspace_id = azurerm_synapse_workspace.synapsewsp.id
   sku_name             = var.sku_name
@@ -73,4 +80,4 @@ resource "azurerm_synapse_spark_pool" "sparkpoolsynapse" {
    auto_pause {
     delay_in_minutes = 15
   }
-}
+}*/
